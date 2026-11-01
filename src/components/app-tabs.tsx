@@ -1,5 +1,5 @@
 import { Colors } from '@/constants/theme';
-import { Label, NativeTabs } from 'expo-router/unstable-native-tabs';
+import { Tabs } from 'expo-router';
 import { useColorScheme } from 'react-native';
 
 export default function AppTabs() {
@@ -7,24 +7,18 @@ export default function AppTabs() {
   const colors = Colors[colorScheme ?? 'light'];
 
   return (
-    <NativeTabs
-      backgroundColor={colors.background}
-      indicatorColor={colors.tint}
-      tintColor={colors.tint}
-      labelStyle={{ selected: { color: colors.text } }}
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: colors.tint,
+        tabBarStyle: {
+          backgroundColor: colors.background,
+        },
+      }}
     >
-      <NativeTabs.Trigger name="index">
-        <Label>Home</Label>
-      </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="explore">
-        <Label>Explore</Label>
-      </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="about">
-        <Label>About</Label>
-      </NativeTabs.Trigger>
-
-    </NativeTabs>
+      <Tabs.Screen name="index" options={{ title: 'Home' }} />
+      <Tabs.Screen name="explore" options={{ title: 'Explore' }} />
+      <Tabs.Screen name="about" options={{ title: 'About' }} />
+    </Tabs>
   );
 }
